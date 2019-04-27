@@ -70,4 +70,3 @@ def bubble_sort(n, lst):
             sorted_lst = True
 
     return swaps_total, lst[0], lst[-1]
-
