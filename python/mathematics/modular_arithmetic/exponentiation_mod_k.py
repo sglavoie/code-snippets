@@ -1,16 +1,16 @@
-"""Compute the result of a^b (mod p) by using the exponentiation technique.
+"""Compute the result of a^b (mod k) by using the exponentiation technique.
 
 The goal here is not efficiency, even though the program is actually pretty
 fast: the algorithm is applied manually for demonstration purposes.
 
 Testing on a modest Intel Core i5, having `a` and `b` each set to a random
-number containing 2,000 digits and `p` set to a modulo of a number containing
+number containing 2,000 digits and `k` set to a modulo of a number containing
 20 digits, results are printed in about 3.3 seconds."""
 
-def binary_remainders(b):
+def binary_remainders(num_b):
     """Take `b` and return the binary equivalent in a list of remainders."""
     remainders = []
-    quotient = b
+    quotient = num_b
     while True:
         prev_quotient = quotient
         quotient //= 2
@@ -37,29 +37,29 @@ def powers_of_two(remainders=None):
     return powers
 
 
-def compute_intermediate_congruences(a, p, powers=None):
-    """Compute all necessary intermediate results of congruence in `mod p` for 
+def compute_intermediate_congruences(num_a, num_k, powers=None):
+    """Compute all necessary intermediate results of congruence in `mod k` for
     powers of 2 in `powers` to form the number `b`."""
     if powers is None:
         return None
 
     go_up_to = max(powers)
 
-    intermediate_results = {1: a}  # Build dictionary to store all results
+    intermediate_results = {1: num_a}  # Build dictionary to store all results
     start_value = 2  # First power of two to calculate congruence
-    congruence = a
+    congruence = num_a
     while start_value <= go_up_to:
         # value to use for next power of 2
-        congruence = congruence ** 2 % p
+        congruence = congruence ** 2 % num_k
         intermediate_results[start_value] = congruence
         start_value *= 2
 
     return intermediate_results
 
 
-def compute_final_congruence(p, powers=None, intermediate_results=None):
+def compute_final_congruence(num_k, powers=None, intermediate_results=None):
     """Take all relevant values from `intermediate_results` matching powers in
-    `powers`, multiply them together and calculate this number `mod p` to get
+    `powers`, multiply them together and calculate this number `mod k` to get
     the final result."""
     if intermediate_results is None or powers is None:
         return None
@@ -72,37 +72,38 @@ def compute_final_congruence(p, powers=None, intermediate_results=None):
                 congruent_results.append(value)
 
     total = 1
-    for result in congruent_results:  # Multiply all results together
-         total = result * total  
-    
-    return total % p  # final congruence we are looking for
+    for result in congruent_results:
+        total = result * total  # Multiply all results together
+
+    return total % num_k  # final congruence we are looking for
 
 
-def compute_congruence(a, b, p):
-    """Return `c`, the result of `a^b (mod p)`."""
-    a = a % p  # Make sure `a` is smaller than `p`
+def compute_congruence(num_a, num_b, num_k):
+    """Return `c`, the result of `a^b (mod k)`."""
+    num_a = num_a % num_k  # Make sure `a` is smaller than `k`
 
     # Reduce `b` to list of remainders in binary
-    remainders = binary_remainders(b)
-    
+    remainders = binary_remainders(num_b)
+
     # Build a list of the powers of 2 forming `b`
     powers = powers_of_two(remainders)
 
     # Build a list of necessary intermediate results to reach
     # the value of `b` from powers of 2: finds congruence for
     # smaller powers of 2 and store them in a list.
-    intermediate_results = compute_intermediate_congruences(a, p, powers)
+    intermediate_results = compute_intermediate_congruences(num_a, num_k,
+                                                            powers)
 
-    # Multiply all relevant intermediate results `mod p` to get the final
-    # congruence of `a^b (mod p)`.
-    return compute_final_congruence(p, powers, intermediate_results)
+    # Multiply all relevant intermediate results `mod k` to get the final
+    # congruence of `a^b (mod k)`.
+    return compute_final_congruence(num_k, powers, intermediate_results)
 
 
 if __name__ == '__main__':
-    print("We will calculate a^b (mod p). Enter only integers.")
-    a = int(input("Provide `a`: "))
-    b = int(input("Provide `b`: "))
-    p = int(input("Provide `p`: "))
+    print("We will calculate a^b (mod k). Enter only integers.")
+    NUM_A = int(input("Provide `a`: "))
+    NUM_B = int(input("Provide `b`: "))
+    NUM_K = int(input("Provide `k`: "))
 
-    result = compute_congruence(a, b, p)
-    print(result)
+    FINAL_RESULT = compute_congruence(NUM_A, NUM_B, NUM_K)
+    print(FINAL_RESULT)
