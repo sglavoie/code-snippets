@@ -5,7 +5,26 @@ fast: the algorithm is applied manually for demonstration purposes.
 
 Testing on a modest Intel Core i5, having `a` and `b` each set to a random
 number containing 2,000 digits and `k` set to a modulo of a number containing
-20 digits, results are printed in about 3.3 seconds."""
+20 digits, results are printed in about 3.3 seconds.
+
+If efficiency matters, this code can be reduced quite substantially as
+demonstrated here:
+
+https://math.stackexchange.com/questions/195634/
+how-do-you-calculate-the-modulo-of-a-high-raised-number#answer-453108
+
+It would result in the following function using bitwise operations:
+
+def mod_pow(base, exp, mod):
+    res = 1
+    while exp > 0:
+        if exp % 2 == 1:
+            res = res * base % mod
+        exp = exp >> 1
+        base = base**2 % mod
+    return res
+"""
+
 
 def binary_remainders(num_b):
     """Take `b` and return the binary equivalent in a list of remainders."""
