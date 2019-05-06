@@ -1,5 +1,5 @@
 def gen_primes():
-    '''Generator of prime numbers.'''
+    """Generator of prime numbers."""
     list_primes = [2, 3]
     candidate = 4
     yield list_primes[0]

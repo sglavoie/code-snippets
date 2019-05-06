@@ -1,5 +1,5 @@
 def test_digit_division(number: int) -> dict:
-    '''Test divisibility of number from 2 to 9.'''
+    """Test divisibility of number from 2 to 9."""
     digit_division = {}
     for digit in range(2, 10):
         if number % digit == 0:

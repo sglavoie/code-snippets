@@ -4,5 +4,5 @@ def is_pangram(user_str):
         if char in string.ascii_lowercase and char not in alpha_str:
             alpha_str.add(char)
             if len(alpha_str) == 26:
-                return 'pangram'
-    return 'not pangram'
+                return "pangram"
+    return "not pangram"

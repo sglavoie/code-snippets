@@ -51,7 +51,7 @@ def powers_of_two(remainders=None):
     powers = []
     for index, remainder in enumerate(remainders):
         if remainder == 1:
-            powers.append(2**index)
+            powers.append(2 ** index)
 
     return powers
 
@@ -110,15 +110,14 @@ def compute_congruence(num_a, num_b, num_k):
     # Build a list of necessary intermediate results to reach
     # the value of `b` from powers of 2: finds congruence for
     # smaller powers of 2 and store them in a list.
-    intermediate_results = compute_intermediate_congruences(num_a, num_k,
-                                                            powers)
+    intermediate_results = compute_intermediate_congruences(num_a, num_k, powers)
 
     # Multiply all relevant intermediate results `mod k` to get the final
     # congruence of `a^b (mod k)`.
     return compute_final_congruence(num_k, powers, intermediate_results)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print("We will calculate a^b (mod k). Enter only integers.")
     NUM_A = int(input("Provide `a`: "))
     NUM_B = int(input("Provide `b`: "))

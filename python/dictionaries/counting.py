@@ -12,8 +12,8 @@ def dict_count(arr: list) -> dict:
 
 
 def count_of_digits(number: int) -> dict:
-    '''Return a dictionary with digits from 1 to 9 as keys and indicate the
-       number of times each digit appear for each key in number.'''
+    """Return a dictionary with digits from 1 to 9 as keys and indicate the
+       number of times each digit appear for each key in number."""
     number_string = str(number)
     digit_dict = {}
     for digit in range(1, 10):
