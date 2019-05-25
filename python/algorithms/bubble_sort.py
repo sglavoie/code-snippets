@@ -11,10 +11,10 @@ def bubble_sort(array_list):
         pass_count += 1  # we must loop through array, so that's a forced pass
         for index in range(len(array_list) - 1):
             first_value = swap_array[index]
-            second_value = swap_array[index+1]
+            second_value = swap_array[index + 1]
             if first_value > second_value:
                 swap_array[index] = second_value
-                swap_array[index+1] = first_value
+                swap_array[index + 1] = first_value
                 current_swaps += 1
         if current_swaps == 0:  # No swaps made from first to last element
             # pass_count and swap_count are already updated by this point
@@ -40,10 +40,10 @@ def bubble_sort(array_list):
         current_swaps = 0
         for index in range(len(array_list) - 1):
             first_value = swap_array[index]
-            second_value = swap_array[index+1]
+            second_value = swap_array[index + 1]
             if first_value > second_value:
                 swap_array[index] = second_value
-                swap_array[index+1] = first_value
+                swap_array[index + 1] = first_value
                 current_swaps += 1
         if current_swaps == 0:  # No swaps made from first to last element
             # pass_count and swap_count are already updated by this point
@@ -53,8 +53,8 @@ def bubble_sort(array_list):
 
 
 def bubble_sort(n, lst):
-    '''`lst` (list) of `n` elements. Returns the number of swaps
-    necessary to sort, the first element and the last one.'''
+    """`lst` (list) of `n` elements. Returns the number of swaps
+    necessary to sort, the first element and the last one."""
     sorted_lst = False
     swaps_total = 0
     while not sorted_lst:

@@ -1,9 +1,9 @@
-'''Simple link checker that will recursively extract URLs from .md files
+"""Simple link checker that will recursively extract URLs from .md files
 from the current directory.
 
 Asynchronous features with the help of the following page:
 https://stackoverflow.com/a/13530258/8787680
-'''
+"""
 import multiprocessing as mp
 import os
 import subprocess
@@ -13,51 +13,55 @@ import time
 import requests
 
 
-FILE_NAME = 'dead.txt'  # Will appear if it contains dead links
+FILE_NAME = "dead.txt"  # Will appear if it contains dead links
 HEADERS = {
-    'User-Agent': ('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 '
-                   '(KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36')
+    "User-Agent": (
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36"
+    )
 }
 
 
 def extract_links():
-    '''Extract links from all .md files recursively from the current
-    repository.'''
-    cmd = ('cat ./**/*.md | grep -Eo "(http|https)://[a-zA'
-           '-Z0-9./?=_~-]*" | sort | uniq > links.txt')
+    """Extract links from all .md files recursively from the current
+    repository."""
+    cmd = (
+        'cat ./**/*.md | grep -Eo "(http|https)://[a-zA'
+        '-Z0-9./?=_~-]*" | sort | uniq > links.txt'
+    )
     subprocess.run(cmd, shell=True)
 
     sites = []
-    with open('links.txt') as f:
+    with open("links.txt") as f:
         content = f.readlines()
         for line in content:
             line = line.strip()
             sites.append(line)
 
-    os.unlink('links.txt')
+    os.unlink("links.txt")
     return sites
 
 
 def download_site(url, q):
-    '''Request an URL. If it can properly be retrieved, add it to queue
-    `q` so that it gets written to a file with the job manager.'''
+    """Request an URL. If it can properly be retrieved, add it to queue
+    `q` so that it gets written to a file with the job manager."""
     global HEADERS
     try:
         with requests.get(url, headers=HEADERS) as response:
             response_length = len(response.content)
             if not response_length or not response.ok:
                 if response.status_code != 403:  # ignore blocked requests
-                    q.put(f'[{response.status_code}] {url}')
+                    q.put(f"[{response.status_code}] {url}")
     except:  # Any kind of error occurring
         try:
-            q.put(f'[{response.status_code}] {url}')
+            q.put(f"[{response.status_code}] {url}")
         except UnboundLocalError:  # response doesn't exist → connection error
             q.put(url)
 
 
 def check_all_ok(dead_file):
-    '''Once we have requested all URLs, check if any was found to be
-    dead and print them with their specific error code.'''
+    """Once we have requested all URLs, check if any was found to be
+    dead and print them with their specific error code."""
     try:
         with open(dead_file) as f:
             content = f.readlines()
@@ -73,24 +77,24 @@ def check_all_ok(dead_file):
 
 
 def listener(q):
-    '''Listens for messages on the `q`, writes to file.'''
+    """Listens for messages on the `q`, writes to file."""
 
-    with open(FILE_NAME, 'w') as f:
+    with open(FILE_NAME, "w") as f:
         while True:
             m = q.get()
 
             # String received, signaling we're done
-            if m == 'kill':
+            if m == "kill":
                 break
 
-            f.write(str(m) + '\n')
+            f.write(str(m) + "\n")
             f.flush()
 
 
 def job_manager(sites):
-    '''The purpose of the job manager is to add "jobs" in a "queue" so
+    """The purpose of the job manager is to add "jobs" in a "queue" so
     that at any time only one "job" will be written to a file thanks to
-    a "listener" that receives incoming "jobs" from the "queue".'''
+    a "listener" that receives incoming "jobs" from the "queue"."""
     # Must use Manager queue here, or will not work
     manager = mp.Manager()
     q = manager.Queue()
@@ -110,7 +114,7 @@ def job_manager(sites):
         job.get()
 
     # Now we are done, kill the listener
-    q.put('kill')
+    q.put("kill")
     pool.close()
 
 

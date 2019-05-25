@@ -14,7 +14,7 @@ def bin_converter(number):
 
     # The last remainder goes first, so the return statement begins with
     # the recursive call.
-    return '{}'.format(bin_converter(next_num)) + '{}'.format(remainder)
+    return "{}".format(bin_converter(next_num)) + "{}".format(remainder)
 
 
 def convert_integer_to_bin_number(num):
@@ -26,7 +26,7 @@ def consecutive_ones(str_number):
     NUMBER, which is a string in this scenario."""
     maximum, current = 0, 0
     for num in str_number:
-        if num == '1':
+        if num == "1":
             current += 1
         else:
             maximum = max(maximum, current)
@@ -36,10 +36,10 @@ def consecutive_ones(str_number):
 
 
 def count_bits(bin_string):
-    '''Return the number of bits in a string of zeros and ones.'''
+    """Return the number of bits in a string of zeros and ones."""
     counter = 0
     for char in bin_string:
-        if char == '1':
+        if char == "1":
             counter += 1
     return counter
 
