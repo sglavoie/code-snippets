@@ -3,7 +3,7 @@ def better_separation(the_function):
 
     def print_separator(*args, **kwargs):
         """Surrounds `the_function` with a separator and add a new line."""
-        separator = SEP * TERMINAL_WIDTH
+        separator = "-" * 80
         print(separator)
         the_function(*args, **kwargs)
         print(separator, "\n")
