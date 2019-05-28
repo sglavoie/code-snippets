@@ -17,10 +17,6 @@ def bin_converter(number):
     return "{}".format(bin_converter(next_num)) + "{}".format(remainder)
 
 
-def convert_integer_to_bin_number(num):
-    return int(bin(num)[2:])
-
-
 def consecutive_ones(str_number):
     """Returns the maximum number of times a consecutive '1' appears in
     NUMBER, which is a string in this scenario."""
@@ -45,4 +41,6 @@ def count_bits(bin_string):
 
 
 def convert_string_to_bin_number(string_int):
+    """ Take a string, convert it to integer, and return its value in
+    binary as a string."""
     return bin(int(string_int))[2:]
