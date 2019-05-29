@@ -1,3 +1,6 @@
+import math
+
+
 def waiting_time(starting_amount, required_amount, interest_rate):
     """Returns the waiting time to get to `required_amount` from
     `starting_amount` at `interest_rate` (in percent) as a integer."""

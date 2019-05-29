@@ -1,4 +1,5 @@
 import glob
+import os
 
 
 def delete_files(source_dir, pattern):

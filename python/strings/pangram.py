@@ -1,3 +1,6 @@
+import string
+
+
 def is_pangram(user_str):
     alpha_str = set()
     for char in user_str.lower():

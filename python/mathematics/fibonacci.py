@@ -1,5 +1,5 @@
 def fib_seq(x):
-    # Fibonacci sequence, recursively
+    """Fibonacci sequence, recursively."""
     if x == 0:
         return 0
     if x == 1:
@@ -12,6 +12,7 @@ FIB_DICT = {1: 1, 2: 2}
 
 
 def fib_efficient(n, fib_dict=FIB_DICT):
+    """Recursive version storing intermediate values along the way."""
     if n in fib_dict:
         return fib_dict[n]
 
