@@ -1,5 +1,5 @@
 def is_julian_leap(year: int) -> bool:
-    """Return whether a year is leap in a Gregorian calendar as a boolean."""
+    """Return whether a year is leap in a Julian calendar as a boolean."""
     return year % 4 == 0
 
 

@@ -41,6 +41,6 @@ def count_bits(bin_string):
 
 
 def convert_string_to_bin_number(string_int):
-    """ Take a string, convert it to integer, and return its value in
+    """ Take a string, cast it to an integer, and return its value in
     binary as a string."""
     return bin(int(string_int))[2:]
