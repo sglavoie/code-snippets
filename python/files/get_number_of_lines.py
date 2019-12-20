@@ -3,8 +3,13 @@ def file_length(file_name):
 
     try:
         with open(file_name) as file_to_check:
+            total = 0
             for index, _ in enumerate(file_to_check):
-                pass
-            return index + 1  # Will return UnboundLocalError if file is empty
-    except (FileNotFoundError, UnboundLocalError):
+                total = index + 1
+            return total
+    except FileNotFoundError:
         return 0
+
+
+if __name__ == "__main__":
+    print(file_length("rename.py"))  # 15

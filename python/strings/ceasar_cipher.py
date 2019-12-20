@@ -1,6 +1,4 @@
-"""
-Ceasar Cipher
-"""
+"""Ceasar Cipher"""
 
 import string
 
@@ -24,7 +22,7 @@ def build_shift_dict(shift) -> dict:
     for i in range(1, 27):
         lower_dict[i] = lower_letters[i - 1]
     lower_shifted_dict = lower_dict.copy()
-    for key in lower_dict.keys():
+    for key in lower_dict:
         if shift + key > 26:
             lower_shifted_dict[key] = lower_dict[shift + key - 26]
         else:
@@ -37,7 +35,7 @@ def build_shift_dict(shift) -> dict:
     for i in range(1, 27):
         upper_dict[i] = upper_letters[i - 1]
     upper_shifted_dict = upper_dict.copy()
-    for key in upper_dict.keys():
+    for key in upper_dict:
         if shift + key > 26:
             upper_shifted_dict[key] = upper_dict[shift + key - 26]
         else:
@@ -71,7 +69,6 @@ def apply_shift(string_to_encrypt, shift) -> str:
 
 
 def read_and_solve():
-    length_string = int(input())
     string_to_change = input()
     shift_to_apply = int(input())
 

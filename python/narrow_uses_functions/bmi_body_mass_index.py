@@ -5,9 +5,8 @@ def bmi_calculator(weight, height) -> str:
     calculation = weight / height ** 2
     if calculation < 18.5:
         return "under"
-    elif 18.5 <= calculation < 25:
+    if 18.5 <= calculation < 25:
         return "normal"
-    elif 25 <= calculation < 30:
+    if 25 <= calculation < 30:
         return "over"
-    else:
-        return "obese"
+    return "obese"

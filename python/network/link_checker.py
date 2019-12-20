@@ -14,12 +14,6 @@ import requests
 
 
 FILE_NAME = "dead.txt"  # Will appear if it contains dead links
-HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-        "(KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36"
-    )
-}
 
 
 def extract_links():
@@ -45,9 +39,15 @@ def extract_links():
 def download_site(url, q):
     """Request an URL. If it can properly be retrieved, add it to queue
     `q` so that it gets written to a file with the job manager."""
-    global HEADERS
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+            "(KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36"
+        )
+    }
+
     try:
-        with requests.get(url, headers=HEADERS) as response:
+        with requests.get(url, headers=headers) as response:
             response_length = len(response.content)
             if not response_length or not response.ok:
                 if response.status_code != 403:  # ignore blocked requests

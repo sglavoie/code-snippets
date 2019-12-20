@@ -110,9 +110,7 @@ def compute_congruence(num_a, num_b, num_k):
     # Build a list of necessary intermediate results to reach
     # the value of `b` from powers of 2: finds congruence for
     # smaller powers of 2 and store them in a list.
-    intermediate_results = compute_intermediate_congruences(
-        num_a, num_k, powers
-    )
+    intermediate_results = compute_intermediate_congruences(num_a, num_k, powers)
 
     # Multiply all relevant intermediate results `mod k` to get the final
     # congruence of `a^b (mod k)`.

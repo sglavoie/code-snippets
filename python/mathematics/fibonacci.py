@@ -8,11 +8,10 @@ def fib_seq(x):
     return x
 
 
-FIB_DICT = {1: 1, 2: 2}
-
-
-def fib_efficient(n, fib_dict=FIB_DICT):
+def fib_efficient(n, fib_dict=None):
     """Recursive version storing intermediate values along the way."""
+    if fib_dict is None:
+        fib_dict = {1: 1, 2: 2}
     if n in fib_dict:
         return fib_dict[n]
 

@@ -2,11 +2,9 @@ def gcd(a, b):
     """Returns the greatest common divisor between "a" and "b"."""
     if a == b:
         return a
-    else:
-        if a > b:
-            return gcd(a - b, b)
-        elif a < b:
-            return gcd(a, b - a)
+    if a > b:
+        return gcd(a - b, b)
+    return gcd(a, b - a)
 
 
 def gcd_recursive(a, b):
@@ -19,8 +17,7 @@ def gcd_recursive(a, b):
     small_int = min([a, b])
     if big_int % small_int == 0:
         return small_int
-    else:
-        return gcd_recursive(small_int, big_int % small_int)
+    return gcd_recursive(small_int, big_int % small_int)
 
 
 def gcd_iterative(a, b):
