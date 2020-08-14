@@ -4,5 +4,5 @@ def factorial(number):
 
     if number == 1:  # Define base case → n = 1
         return 1
-    # Define recursive case
-    return number * factorial(number - 1)
+    
+    return number * factorial(number - 1)  # Define recursive case

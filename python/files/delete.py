@@ -18,5 +18,5 @@ def delete_files(source_dir, pattern):
 
         for matching_file in matching_files:
             os.remove(matching_file)
+            
         print("Files deleted.")
-        return

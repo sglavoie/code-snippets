@@ -12,4 +12,4 @@ def file_length(file_name):
 
 
 if __name__ == "__main__":
-    print(file_length("rename.py"))  # 15
+    print(file_length("rename.py"))  # e.g. 15
